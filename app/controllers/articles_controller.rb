@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :is_signed_in
 
   def index
     @articles = Article.all
@@ -54,4 +55,9 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :text)
   end
+
+  def is_signed_in
+    redirect_to root_url if session[:user_id].nil?
+  end
+
 end

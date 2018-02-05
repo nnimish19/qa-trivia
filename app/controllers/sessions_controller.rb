@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
 
 
     session[:user_id] = user.id
-    redirect_to root_url
+    redirect_to articles_url
+    # redirect_to root_url
   end
 
   def destroy
