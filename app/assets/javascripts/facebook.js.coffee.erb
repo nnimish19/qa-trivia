@@ -1,0 +1,25 @@
+jQuery ->
+    $('body').prepend('<div id="fb-root"></div>')
+
+    $.ajax
+        url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+        dataType: 'script'
+        cache: true
+
+
+window.fbAsyncInit = ->
+    FB.init(appId: '<%= ENV["FACEBOOK_APP_ID"] %>', cookie: true)>
+    console.log('foo1');
+    $('#sign_in').click (e) ->
+        e.preventDefault()
+        console.log('foo2');
+        FB.login (response) ->
+            console.log(response);
+            console.log(response.authResponse);
+            window.location = '/auth/facebook/callback' if response.authResponse
+
+    $('#sign_out').click (e) ->
+        FB.getLoginStatus (response) ->
+            console.log(response.authResponse);
+            FB.logout() if response.authResponse
+        true
