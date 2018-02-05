@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # Rails matches the routes in the order defined in routes.rb and will call the controller action of the first matching route.
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
@@ -16,7 +17,9 @@ Rails.application.routes.draw do
 
 
   get 'welcome/index' #get 'welcome/index' tells Rails to map requests by browser to "http://localhost:3000/welcome/index" > to the welcome controller's index action
-
+  get 'articles/answer'# , :to => 'articles#answer'
+  get 'articles/view'
+  # post 'articles/view'
   resources :articles
 
   root 'welcome#index'  #root 'welcome#index' tells Rails to map requests to the "root of the application" to the "welcome controller's index action"

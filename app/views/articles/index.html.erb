@@ -16,6 +16,7 @@
         <td><%= link_to 'Destroy', article_path(article),
                         method: :delete,
                         data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Answer', articles_answer_path(:my_service => { :account_id => article.id }) %></td>
       </tr>
   <% end %>
 </table>

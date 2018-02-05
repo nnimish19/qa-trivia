@@ -78,6 +78,14 @@ class ArticlesController < ApplicationController
 
   end
 
+  def answer
+    Rails.logger.info("--------------Nimish ---------------")
+    Rails.logger.info(params)
+  end
+
+  def view
+
+  end
 
   private
   # We have to whitelist our controller parameters to prevent wrongful mass assignment.
