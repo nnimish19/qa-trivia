@@ -17,10 +17,15 @@ Rails.application.routes.draw do
 
 
   get 'welcome/index' #get 'welcome/index' tells Rails to map requests by browser to "http://localhost:3000/welcome/index" > to the welcome controller's index action
-  get 'articles/answer'# , :to => 'articles#answer'
-  get 'articles/view'
+
   # post 'articles/view'
   resources :articles
+  resources :questions
+  resources :responses
+  resources :users
+  
+  get 'articles/answer'# , :to => 'articles#answer'
+  get 'articles/view'
 
   root 'welcome#index'  #root 'welcome#index' tells Rails to map requests to the "root of the application" to the "welcome controller's index action"
 
