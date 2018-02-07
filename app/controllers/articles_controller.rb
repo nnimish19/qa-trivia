@@ -44,6 +44,9 @@ class ArticlesController < ApplicationController
   # Notice that inside the create action we use "render" instead of "redirect_to" when save returns false.
   # The render method is used so that the @article object is passed back to the “new” template when it is rendered.
   # This rendering is done within the same request as the form submission, whereas the redirect_to will tell the browser to issue another request.
+  # params: {"utf8"=>"✓", "authenticity_token"=>"+oUBRSJ3fiYob3GUXIaTYXp4ibgoalZRt9NGJO+/5lUwztR+IIIU7/7O+9UAHEv9A1uXqnrgxR5G2B2/nB634A==",
+  #          #  "question"=>{"statement"=>"nearest star", "answer"=>"sun", "qtags"=>"cosmos"},
+  #          #  "commit"=>"Create Question", "controller"=>"questions", "action"=>"create"}
   def create
     # render plain: params[:article].inspect
     # @article = Article.new(params[:article])  #error: cannot save all parameters at once: strong_parameters
