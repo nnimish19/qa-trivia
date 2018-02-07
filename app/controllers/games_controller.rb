@@ -9,17 +9,20 @@ class GamesController < ApplicationController
   def show_ratings
     @users = User.all
     @cur_user = current_user
-    responses = Response.all
+
+    @responses = Response.all
     @scores=Hash.new(0) #https://stackoverflow.com/questions/2990812/initializing-hashes
     @total_correct = 0
     @total_incorrect = 0
     @upvotes=0          #For each question current_user has created, how many people upvoted it
     @downvotes=0
+    @best_category='Nothing best yet!'
     cat=Hash.new(0)     #category and its score: for current user only
 
+    return if @responses.empty?
 
     # Traverse all responses. each response belongs to a unique question. and that question has unique owner(q.user_id)
-    responses.each{|r|
+    @responses.each{|r|
       @scores[r.user_id]+= (r.eval==true ? 4:-1)
       q=r.question
       tags=q.tags
@@ -50,7 +53,7 @@ class GamesController < ApplicationController
 
     #Sort map by value. Get the first key
     ar = cat.sort_by {|k,v| v}.reverse
-    @best_category = ar.first[0]  unless ar.nil?  #[["bonds", 8], ["relationships", 8], ["personal", 8], ["general", 4], ["bio", 3], ["medical", -1]]
+    @best_category = ar.first[0]  unless ar.empty?  #[["bonds", 8], ["relationships", 8], ["personal", 8], ["general", 4], ["bio", 3], ["medical", -1]]
   end
 
 end
