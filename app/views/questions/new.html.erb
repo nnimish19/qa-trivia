@@ -1,0 +1,47 @@
+<%= form_with model: @question, local: true do |form| %>
+
+    <% if @question.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@question.errors.count, "error") %> prohibited
+            this article from being saved:
+          </h2>
+          <ul>
+            <% @question.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <br>
+    <%= form.hidden_field :user_id %>
+
+    <p>
+      <!--<!%= f.label :name, 'Your Name' %>-->
+      <%= form.label :name, "Question Statement"%><br>
+      <%= form.text_area :statement, cols: 100, rows: 5%>
+    </p>
+
+    <p>
+      <%= form.label :answer %><br>
+      <%= form.text_area :answer, cols: 100, rows: 2 %>
+    </p>
+
+    <p>
+      <%= form.label :tags %><br>
+      <%= form.text_field :qtags, size: 40%>
+      (use comma separated form like -physics, cosmos, ruby, rails)
+    </p>
+
+    <p>
+      <%= form.submit 'CREATE', :onclick => "alert('Are you sure? You cannot make changes afterwards!')"%>
+    </p>
+
+    <%unless @tags.nil?%>
+        <br>Tag suggestions from database: <%=@tags.map{|x| x.value}.join(", ")%><br>
+    <%end%>
+
+<% end %>
+<br><br>
+<%= link_to 'Go Home!', games_path %>

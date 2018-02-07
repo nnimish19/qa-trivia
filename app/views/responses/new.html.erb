@@ -1,0 +1,49 @@
+<%= form_with model: @response, local: true do |form| %>
+
+    <%if @question.nil? %>
+        <h2>No questions at this time. You can create create some at the home page.</h2>
+    <%else%>
+
+        <% if @response.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@response.errors.count, "error") %> prohibited
+                this article from being saved:
+              </h2>
+              <ul>
+                <% @response.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <%= form.hidden_field :question_id %>
+        <%= form.hidden_field :user_id %>
+
+        <p>
+          Problem Statement: <%=@question.statement%>
+        </p>
+
+        <p>
+          <%= form.label :Answer %><br>
+          <%= form.text_area :statement, cols: 100 %>
+        </p>
+
+
+        <p>
+          <%if @response.statement.nil? || @response.statement.empty?%>
+            <%= form.submit "SUBMIT"%><br><br>
+          <%else%>
+              <%if @response.eval %>
+                Correct!<br><br>
+              <%else%>
+                Wrong Answer. Correct answer is: "<%=@question.answer%>" <br><br>
+              <%end%>
+            <!--You can rate this problem or move to the next question-->
+              <%= link_to 'Next Question', new_response_path %><br><br>
+          <% end %>
+        </p>
+    <% end %>
+    <%= link_to 'Go Home!', games_path %>
+<% end %>

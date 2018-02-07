@@ -16,16 +16,19 @@ Rails.application.routes.draw do
   # get 'signout' => 'sessions#destroy', as: 'signout'
 
 
-  get 'welcome/index' #get 'welcome/index' tells Rails to map requests by browser to "http://localhost:3000/welcome/index" > to the welcome controller's index action
+  # get 'welcome/index' #get 'welcome/index' tells Rails to map requests by browser to "http://localhost:3000/welcome/index" > to the welcome controller's index action
 
   # post 'articles/view'
   resources :articles
   resources :questions
   resources :responses
   resources :users
-  
+
   get 'articles/answer'# , :to => 'articles#answer'
   get 'articles/view'
+
+  get 'games', to: 'games#index'    # get 'games' => 'games#index', as: 'games'
+  get 'games/show_ratings'
 
   root 'welcome#index'  #root 'welcome#index' tells Rails to map requests to the "root of the application" to the "welcome controller's index action"
 
