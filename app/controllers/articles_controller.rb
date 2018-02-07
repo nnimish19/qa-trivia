@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :is_signed_in
 
   #  <%= link_to 'New article', new_article_path %> Rails erb evaluated "new_article_path" to "articles/new". And browser sends default "GET" request to server.
 
@@ -50,8 +49,13 @@ class ArticlesController < ApplicationController
     # @article = Article.new(params[:article])  #error: cannot save all parameters at once: strong_parameters
     @article = Article.new(article_params)
 
-    # @article.save
-    # redirect_to @article    #CALL to show action?
+    # Adding custom errors?
+    # if(@article.title.empty? ||@question.text.empty?)
+    #   @question.add(?)
+    #   render 'new'
+    #   return
+    # end
+
     if @article.save
       redirect_to @article    #redirect the user to the show action; this is not internal. we told the browser to send new request at specified "redirected path"
 
@@ -91,12 +95,20 @@ class ArticlesController < ApplicationController
   # We have to whitelist our controller parameters to prevent wrongful mass assignment.
   # In this case, we want to both allow and require the title and text parameters for valid use of create.
   # The syntax for this introduces require and permit.
+
+  # https://stackoverflow.com/questions/18424671/what-is-params-requireperson-permitname-age-doing-in-rails-4
+  # The params in a controller looks like a Hash, but it's actually an instance of ActionController::Parameters,
+  # which provides several methods such as require and permit.
+
+  # The "require" method ensures that a specific parameter is present, and if it's not provided, the require method throws an error.
+  #   >>It returns an instance of ActionController::Parameters for the key passed into require.
+
+  # The permit method returns a copy of the parameters object, returning only the permitted keys and values.
+  # >>When creating a new ActiveRecord model, only the permitted attributes are passed into the model.
+  # >>IMPORTANT: permit returns another hash that contains only the permitted key AND (this is critical) will respond with true
+  # to the "permitted?" method. By default, an instance of the ActionController::Parameters class will return false for "permitted?"
+  # Responding true to permitted? means the parameter object can be used in mass assignment; else the app will throw a ForbiddenAttributes error.
   def article_params
     params.require(:article).permit(:title, :text)
   end
-
-  def is_signed_in
-    redirect_to root_url if session[:user_id].nil?
-  end
-
 end
