@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div id="user_nav">
+    <div id="user_nav" style="float:right;">
         <% if current_user %>
             Signed in as <strong><%= current_user.name %></strong>!
             <%= link_to "Sign out", signout_path, id: "sign_out" %>
