@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :is_signed_in, only: [:create]
+
   def create
     Rails.logger.info("\n---------------------Session: create---------------------\n")
     # Rails.logger.info(request.env["omniauth.auth"])   #Do not log this
@@ -7,7 +9,8 @@ class SessionsController < ApplicationController
 
 
     session[:user_id] = user.id
-    redirect_to articles_url
+    redirect_to games_path
+    # redirect_to articles_url
     # redirect_to root_url
   end
 
