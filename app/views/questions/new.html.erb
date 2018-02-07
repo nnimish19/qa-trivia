@@ -35,7 +35,7 @@
     </p>
 
     <p>
-      <%= form.submit 'CREATE', :onclick => "alert('Are you sure? You cannot make changes afterwards!')"%>
+      <%= form.submit 'CREATE', data: { confirm: 'Are you sure? You cannot make changes afterwards!'}%>
     </p>
 
     <%unless @tags.nil?%>
