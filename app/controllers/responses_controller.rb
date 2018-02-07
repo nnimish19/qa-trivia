@@ -7,6 +7,7 @@ class ResponsesController < ApplicationController
     @response = Response.new
     @response.question_id = @question.id unless @question.nil?
     @response.user_id = current_user.id
+    @tags = @question.tags unless @question.nil?
   end
 
   def create

@@ -22,9 +22,11 @@
         <%= form.hidden_field :user_id %>
 
         <p>
-          Problem Statement: <%=@question.statement%>
+          <b>Problem Statement</b>: <%=@question.statement%>
         </p>
-
+        <%unless @tags.nil?%>
+            Tags: <%=@tags.map{|x| x.value}.join(", ")%><br><br>
+        <%end%>
         <p>
           <%= form.label :Answer %><br>
           <%= form.text_area :statement, cols: 100 %>
