@@ -1,5 +1,9 @@
 class QuestionsController < ApplicationController
 
+  def index
+    @questions = current_user.questions
+  end
+
   def new
     @question = Question.new
     @question.user_id = current_user.id

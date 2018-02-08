@@ -1,0 +1,28 @@
+<%if @questions.empty?%>
+    <h3>you haven't added any questions yet! please go and add some. </h3>
+<%else%>
+    <h2>My Questions </h2>
+    <table>
+      <col width="50">
+      <col width="400">
+      <col width="200">
+      <tr>
+        <th>#Index</th>
+        <th>Question </th>
+        <th>Answer </th>
+        <th>Tags </th>
+      </tr>
+
+      <% @questions.each_with_index do |q,i| %>
+          <tr>
+            <td><%=i+1%></td>
+            <td><center><%= q.statement %></center></td>
+            <td><center><%= q.answer %></center></td>
+            <td><center><%= q.tags.map{|x| x.value}.join(", ") unless q.tags.nil?%></center></td>
+          </tr>
+      <% end %>
+    </table>
+<%end%>
+<br><br>
+
+<%= link_to 'Go Home!', games_path %>
