@@ -1,14 +1,14 @@
+<h2>Play Trivia</h2>
 <%= form_with model: @response, local: true do |form| %>
 
     <%if @question.nil? %>
-        <h2>No questions at this time. You can create create some at the home page.</h2>
+        <h2>No new questions for you. You can ask a friend to create some.</h2>
     <%else%>
 
         <% if @response.errors.any? %>
             <div id="error_explanation">
               <h2>
-                <%= pluralize(@response.errors.count, "error") %> prohibited
-                this article from being saved:
+                <%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:
               </h2>
               <ul>
                 <% @response.errors.full_messages.each do |msg| %>
@@ -24,8 +24,8 @@
         <p>
           <b>Problem Statement</b>: <%=@question.statement%>
         </p>
-        <%unless @tags.nil?%>
-            Tags: <%=@tags.map{|x| x.value}.join(", ")%><br><br>
+        <%unless  @tags.nil? || @tags.empty?%>
+            Tags: <%= @tags.map{|x| x.value}.join(", ")%><br><br>
         <%end%>
         <p>
           <%= form.label :Answer %><br>
