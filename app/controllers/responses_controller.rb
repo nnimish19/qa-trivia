@@ -16,9 +16,9 @@ class ResponsesController < ApplicationController
     @response = Response.new(response_params)
     @question = Question.find(params[:response][:question_id])
 
-    @response.statement = @response.statement.downcase.strip
+    @response.statement = @response.statement.strip
 
-    if(@response.statement == @question.answer)
+    if(@response.statement.casecmp(@question.answer) ==0)
       @response.eval = true
     else
       @response.eval = false
