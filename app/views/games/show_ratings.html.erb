@@ -4,7 +4,7 @@
 <%if @responses.empty?%>
     <h3>game is yet to begin!</h3>
 <%else%>
-    My Score: <%= @scores[@cur_user.id]%> <br>
+    My Score: <%= @scores[current_user.id]%> <br>
     <br>
     <table>
       <tr>
@@ -40,6 +40,7 @@
       <% @scores.each do |k,v| %>
           <tr>
             <td><%= @users.find(k).name %></td>
+            <!--<td><!%= @users[k].name %></td>-->
             <td><%= v %></td>
           </tr>
       <% end %>

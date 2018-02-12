@@ -8,9 +8,8 @@ class GamesController < ApplicationController
   # also shows which category the user has answered the best in.
   def show_ratings
     @users = User.all
-    @cur_user = current_user
+    @responses = Response.fetch_all
 
-    @responses = Response.all
     @scores=Hash.new(0) #https://stackoverflow.com/questions/2990812/initializing-hashes
     @total_correct = 0
     @total_incorrect = 0
